@@ -1,0 +1,71 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  /bpmn:
+    get:
+      operationId: BPMNController_getWorkflows
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  /bpmn/{workflowname}:
+    post:
+      operationId: startWorkflow
+      summary: ""
+      description: start new workflow
+      parameters:
+        - name: workflowname
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        description: create worflow, submit data in json format
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SampleApiSchema"
+      responses:
+        "201":
+          description: ""
+info:
+  title: Cats example
+  description: The cats API description
+  version: "1.0"
+  contact: {}
+tags:
+  - name: bpmn
+    description: ""
+servers: []
+components:
+  schemas:
+    SampleApiSchema:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          default: ""
+        tenantId:
+          type: number
+          default: 1
+        name:
+          type: string
+          default: ""
+        email:
+          type: string
+          default: ""
+        age:
+          type: number
+          default: 0
+      required:
+        - name
+        - email
+        - age
